@@ -16,6 +16,7 @@ import android.widget.Toast;
 
 import com.example.coolweather.db.City;
 import com.example.coolweather.db.County;
+import com.example.coolweather.db.Province;
 import com.example.coolweather.util.HttpUtil;
 import com.example.coolweather.util.Utility;
 
@@ -29,8 +30,6 @@ import java.util.List;
 import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.Response;
-
-import static android.R.attr.type;
 
 /**
  * Created by Ivan_Keung on 2016/12/26.
@@ -53,9 +52,9 @@ public class ChooseAreaFragment extends Fragment {
     private City selectedCity;
     private int currentLevel;
 
-    @Nullable
+
     @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view=inflater.inflate(R.layout.choose_area,container,false);
         titleText= (TextView) view.findViewById(R.id.title_text);
         backButton= (Button) view.findViewById(R.id.back_button);
@@ -66,7 +65,7 @@ public class ChooseAreaFragment extends Fragment {
     }
 
     @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+    public void onActivityCreated( Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -82,7 +81,7 @@ public class ChooseAreaFragment extends Fragment {
         });
         backButton.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
+            public void onClick(View v) {
                 if(currentLevel==LEVEL_COUNTY){
                     queryCities();
                 }else if(currentLevel==LEVEL_CITY){
@@ -151,7 +150,7 @@ public class ChooseAreaFragment extends Fragment {
     }
 
 
-    private void queryFromServer(String address, final String province) {
+    private void queryFromServer(String address, final String type) {
         showProgressDialog();
         HttpUtil.sendOkHttpRequest(address, new Callback() {
             @Override

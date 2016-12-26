@@ -4,6 +4,7 @@ import android.text.TextUtils;
 
 import com.example.coolweather.db.City;
 import com.example.coolweather.db.County;
+import com.example.coolweather.db.Province;
 
 import org.json.JSONArray;
 import org.json.JSONException;
